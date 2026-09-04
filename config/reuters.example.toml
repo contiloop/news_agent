@@ -1,0 +1,64 @@
+# Copy to the matching .toml file and fill in your local settings.
+source_id = "reuters"
+feed_url = "https://www.reuters.com/"
+user_agent = "news-agent/0.1"
+timeout_seconds = 20
+codex_timeout_seconds = 300
+database_file = "../data/news.sqlite3"
+memory_directory = "../data/memory"
+browser_mode = "dedicated_chrome"
+browser_launch_mode = "hidden_cdp"
+browser_executable = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+browser_profile_directory = "../data/reuters-chrome-profile"
+article_body_selector = "[data-testid^='paragraph']"
+
+browser_section_urls = [
+  "https://www.reuters.com/business/",
+  "https://www.reuters.com/markets/",
+  "https://www.reuters.com/world/",
+  "https://www.reuters.com/technology/",
+]
+browser_article_allowed_hosts = ["www.reuters.com", "reuters.com"]
+browser_article_allowed_path_prefixes = [
+  "/business/",
+  "/markets/",
+  "/world/",
+  "/technology/",
+  "/legal/",
+]
+browser_article_excluded_path_prefixes = [
+  "/sports/",
+  "/lifestyle/",
+  "/pictures/",
+  "/video/",
+]
+browser_candidate_collect_limit = 60
+browser_candidate_prompt_limit = 20
+browser_candidate_selection_limit = 5
+browser_candidate_read_limit = 3
+browser_candidate_rejected_cooldown_hours = 24
+browser_candidate_selection_profile = """
+Prefer concrete, market-moving or policy-relevant Reuters stories with clear actors,
+dates, numbers, and real-world consequences. Focus on energy, macro, technology,
+and geopolitics, especially when the story has policy, supply-chain, company,
+commodity, currency, rates, or financial-market impact.
+
+Downrank sports, entertainment, lifestyle, photo galleries, videos, liveblogs,
+routine market wraps, shallow clickbait, and minor repeat updates of already-obvious
+ongoing stories.
+"""
+
+[notifications]
+lease_seconds = 120
+max_attempts = 5
+retry_base_seconds = 30
+retry_max_seconds = 900
+
+[[notifications.targets]]
+id = "telegram"
+adapter = "telegram"
+api_base_url = "https://api.telegram.org"
+chat_id = "YOUR_TELEGRAM_CHAT_ID"
+bot_token_keychain_service = "news-agent.telegram.bot-token"
+bot_token_keychain_account = "YOUR_TELEGRAM_BOT_ACCOUNT"
+timeout_seconds = 20

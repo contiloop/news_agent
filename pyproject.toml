@@ -1,0 +1,22 @@
+[project]
+name = "news-agent"
+version = "0.1.0"
+description = "Local-first news discovery agent"
+requires-python = ">=3.12"
+dependencies = [
+    "cua-driver==0.19.2",
+    "feedparser>=6,<7",
+    "httpx>=0.28,<1",
+    "playwright>=1.50,<2",
+    "pydantic>=2,<3",
+]
+
+[project.scripts]
+news-agent = "news_agent.cli:main"
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

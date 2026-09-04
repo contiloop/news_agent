@@ -1,0 +1,37 @@
+# Copy to the matching .toml file and fill in your local settings.
+source_id = "cnbc-business"
+feed_url = "https://www.cnbc.com/id/10001147/device/rss/rss.html"
+news_sitemap_url = "https://www.cnbc.com/sitemap_news.xml"
+news_sitemap_excluded_keyword = "Earnings"
+user_agent = "news-agent/0.1"
+timeout_seconds = 20
+codex_timeout_seconds = 300
+database_file = "../data/news.sqlite3"
+memory_directory = "../data/memory"
+browser_mode = "dedicated_chrome"
+browser_executable = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+browser_profile_directory = "../data/chrome-profile"
+article_body_selector = ":is(.ArticleBody-articleBody, .FeaturedContent-articleBody) > .group > p"
+article_access_denied_selector = "[class*='ArticleGate-'][class$='Gate']"
+article_access_denied_phrases = [
+  "Subscribe to CNBC PRO",
+  "Read this article and get essential investing tools with CNBC Pro",
+  "When you become a Pro member you unlock",
+  "Read this article and upgrade your investing tools with our new Investing Club offer",
+  "When you join the club you unlock",
+]
+
+[notifications]
+lease_seconds = 120
+max_attempts = 5
+retry_base_seconds = 30
+retry_max_seconds = 900
+
+[[notifications.targets]]
+id = "telegram"
+adapter = "telegram"
+api_base_url = "https://api.telegram.org"
+chat_id = "YOUR_TELEGRAM_CHAT_ID"
+bot_token_keychain_service = "news-agent.telegram.bot-token"
+bot_token_keychain_account = "YOUR_TELEGRAM_BOT_ACCOUNT"
+timeout_seconds = 20
